@@ -14,6 +14,8 @@ export class PreviewSection {
     private readonly mountainTimeSlider = $(`<input type="range" min="0" max="10.0" step="0.00001" value="0">`).on("input", () => this.preview());
     private readonly starZRotSlider = $(`<input type="range" min="-0.999" max="0.999" step="0.00001" value="0.4">`).on("input", () => this.preview());
     private readonly starXRotSlider = $(`<input type="range" min="-0.999" max="0.999" step="0.00001" value="0.0">`).on("input", () => this.preview());
+    private readonly milkyScaleSlider = $(`<input type="range" min="0.1" max="5.0" step="0.00001" value="1.0">`).on("input", () => this.preview());
+    private readonly milkyBlendSlider = $(`<input type="range" min="0.0" max="5.0" step="0.00001" value="1.0">`).on("input", () => this.preview());
 
     readonly element = $(`<section>`).append(
         $(`<h2>`).text("【STEP.1】 各種設定を行ってください"),
@@ -25,10 +27,10 @@ export class PreviewSection {
                 $(`<div>`).text("カメラ上下位置："), this.cameraYSlider,
                 $(`<div>`).text("カメラ上下向き："), this.cameraXRotSlider,
                 $(`<div>`).text("山形状："), this.mountainTimeSlider,
-
                 $(`<div>`).text("天球Z軸回転："), this.starZRotSlider,
                 $(`<div>`).text("天球X軸回転："), this.starXRotSlider,
-
+                $(`<div>`).text("天の川大きさ："), this.milkyScaleSlider,
+                $(`<div>`).text("天の川濃さ："), this.milkyBlendSlider,
             ),
         ),
     );
@@ -72,6 +74,8 @@ export class PreviewSection {
             mountainTime: parseFloat(this.mountainTimeSlider.val() + ""),
             starZRot: parseFloat(this.starZRotSlider.val() + "") * Math.PI / 2,
             starXRot: -parseFloat(this.starXRotSlider.val() + "") * Math.PI / 2,
+            milkyScale: parseFloat(this.milkyScaleSlider.val() + ""),
+            milkyBlend: parseFloat(this.milkyBlendSlider.val() + ""),
         }
     }
 

@@ -7,6 +7,8 @@ export interface RendererParams {
     readonly mountainTime: number;
     readonly starZRot: number;
     readonly starXRot: number;
+    readonly milkyScale: number;
+    readonly milkyBlend: number;
 }
 
 interface Uniform1fInfo {
@@ -24,6 +26,8 @@ export class Renderer {
         { name: "u_mountainTime", getValue: p => p.mountainTime },
         { name: "u_starZRot", getValue: p => p.starZRot },
         { name: "u_starXRot", getValue: p => p.starXRot },
+        { name: "u_milkyScale", getValue: p => p.milkyScale },
+        { name: "u_milkyBlend", getValue: p => p.milkyBlend },
     ]
 
     constructor(

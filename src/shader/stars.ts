@@ -23,7 +23,7 @@ float randRange(float x, float min, float max) {
 // 天の川
 vec3 getMilkyWayColor(Ray ray) {
     float noise = fbm(5, ray.direction, 0.9, 2.6, 1.0, 0.51) * 0.08;
-    float band = pow(0.07 / length(ray.direction.x + noise), 1.8);
+    float band = pow(0.07 * u_milkyScale / length(ray.direction.x + noise), 1.8);
 
 
     vec3 baseCol = mix(vec3(0.6392, 0.8392, 1.0), vec3(0.1529, 0.1961, 0.2078), snoise(ray.direction * 10.1) * 0.5 + 0.5);
@@ -32,12 +32,12 @@ vec3 getMilkyWayColor(Ray ray) {
     vec3 col = baseCol * wayBrightness;
 
     float noise2 = fbm(5, ray.direction, 0.55, 2.6, 1.0, 0.51) * 0.0015;
-    float band2 = pow(0.02 / length(ray.direction.x + noise + noise2), 1.8);
+    float band2 = pow(0.02 * u_milkyScale / length(ray.direction.x + noise + noise2), 1.8);
     col -= vec3(0.9, 0.9, 1.0) * clamp(fbm(5, ray.direction, 40.0, 2.0, 1.0, 0.9) * 0.2 + 0.25, 0.0, 1.0) * clamp(band2, 0.0, 2.0) * 0.9;
     col = max(col, 0.0) * 0.3;
 
     float brightness = 0.0;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         brightness += smoothstep(0.7, 1.0, snoise(ray.direction * (190.0 + float(i) * 5.0)));
     }
     col += baseCol * clamp(band, 0.0, 1.0) * brightness;
@@ -48,7 +48,7 @@ vec3 getMilkyWayColor(Ray ray) {
 // 星たちの色
 vec3 getStarsColor(Ray ray) {
     ray.direction *= rotateX(u_starXRot) * rotateZ(u_starZRot);
-    vec3 col = getMilkyWayColor(ray);
+    vec3 col = getMilkyWayColor(ray) * u_milkyBlend;
 
     // 小さな星
     float n = snoise(ray.direction * 180.0);

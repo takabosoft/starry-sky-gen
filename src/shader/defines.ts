@@ -9,6 +9,8 @@ uniform float u_cameraXRot;
 uniform float u_mountainTime;
 uniform float u_starZRot;
 uniform float u_starXRot;
+uniform float u_milkyScale;
+uniform float u_milkyBlend;
 
 const int u_fbmMaxSteps = 10;
 const int u_fbmMinSteps = 5;
