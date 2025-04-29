@@ -12,6 +12,8 @@ export class PreviewSection {
     private readonly cameraYSlider = $(`<input type="range" min="0.001" max="10.0" step="0.00001" value="2.0">`).on("input", () => this.preview());
     private readonly cameraXRotSlider = $(`<input type="range" min="-0.999" max="0.999" step="0.00001" value="0.2">`).on("input", () => this.preview());
     private readonly mountainTimeSlider = $(`<input type="range" min="0" max="10.0" step="0.00001" value="0">`).on("input", () => this.preview());
+    private readonly starZRotSlider = $(`<input type="range" min="-0.999" max="0.999" step="0.00001" value="0.4">`).on("input", () => this.preview());
+    private readonly starXRotSlider = $(`<input type="range" min="-0.999" max="0.999" step="0.00001" value="0.0">`).on("input", () => this.preview());
 
     readonly element = $(`<section>`).append(
         $(`<h2>`).text("【STEP.1】 各種設定を行ってください"),
@@ -23,6 +25,9 @@ export class PreviewSection {
                 $(`<div>`).text("カメラ上下位置："), this.cameraYSlider,
                 $(`<div>`).text("カメラ上下向き："), this.cameraXRotSlider,
                 $(`<div>`).text("山形状："), this.mountainTimeSlider,
+
+                $(`<div>`).text("天球Z軸回転："), this.starZRotSlider,
+                $(`<div>`).text("天球X軸回転："), this.starXRotSlider,
 
             ),
         ),
@@ -65,6 +70,8 @@ export class PreviewSection {
             cameraY: parseFloat(this.cameraYSlider.val() + ""),
             cameraXRot: -parseFloat(this.cameraXRotSlider.val() + "") * Math.PI / 2,
             mountainTime: parseFloat(this.mountainTimeSlider.val() + ""),
+            starZRot: parseFloat(this.starZRotSlider.val() + "") * Math.PI / 2,
+            starXRot: -parseFloat(this.starXRotSlider.val() + "") * Math.PI / 2,
         }
     }
 
