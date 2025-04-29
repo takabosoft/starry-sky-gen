@@ -76,6 +76,10 @@ export class PreviewSection {
             starXRot: -parseFloat(this.starXRotSlider.val() + "") * Math.PI / 2,
             milkyScale: parseFloat(this.milkyScaleSlider.val() + ""),
             milkyBlend: parseFloat(this.milkyBlendSlider.val() + ""),
+
+            cloudMaxSteps,
+            fbmMaxSteps,
+            fbmMinSteps,
         }
     }
 

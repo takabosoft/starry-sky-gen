@@ -38,11 +38,6 @@ float calcHitAtY(float y, Ray ray) {
     return (y - ray.origin.y) / ray.direction.y;
 }
 
-const float u_cloudMinY = 100.0;
-const float u_cloudThickness = 50.0;
-const int u_cloudMaxSteps = 40;
-const float u_cloudAlphaScale = 0.04;
-
 // レイマーチングで雲の色を算出します。
 vec4 getCloudColor(Ray ray) {
     if (ray.direction.y < 0.0) {
