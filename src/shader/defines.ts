@@ -20,13 +20,15 @@ uniform float u_cloudMinY;
 uniform float u_cloudThickness;
 uniform float u_cloudAlphaScale;
 
+uniform float u_waveFactor;
+uniform float u_waveScale;
+uniform float u_waveTime;
+
 uniform int u_fbmMaxSteps;
 uniform int u_fbmMinSteps;
 uniform int u_cloudMaxSteps;
 
-const float u_waveFactor = 0.02;
-const float u_waveScale = 1.0;
-const float u_waveTime = 0.0;
+
 
 const float PI = 3.14159265359;
 `;

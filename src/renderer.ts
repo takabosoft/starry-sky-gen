@@ -18,6 +18,10 @@ export interface RendererParams {
     readonly cloudThickness: number;
     readonly cloudAlphaScale: number;
 
+    readonly waveFactor: number;
+    readonly waveScale: number;
+    readonly waveTime: number;
+
     readonly cloudMaxSteps: number;
     readonly fbmMaxSteps: number;
     readonly fbmMinSteps: number;
@@ -53,6 +57,11 @@ export class Renderer {
         { name: "u_cloudMinY", getValue: p => p.cloudMinY },
         { name: "u_cloudThickness", getValue: p => p.cloudThickness },
         { name: "u_cloudAlphaScale", getValue: p => p.cloudAlphaScale },
+
+        { name: "u_waveFactor", getValue: p => p.waveFactor },
+        { name: "u_waveScale", getValue: p => p.waveScale },
+        { name: "u_waveTime", getValue: p => p.waveTime },
+  
     ];
     private readonly uniform1iInfos: readonly Uniform1iInfo[] = [
         { name: "u_cloudMaxSteps", getValue: p => p.cloudMaxSteps },

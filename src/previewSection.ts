@@ -25,6 +25,10 @@ export class PreviewSection {
     private readonly cloudThicknessSlider = $(`<input type="range" min="10" max="700" step="0.000011" value="50">`).on("input", () => this.preview());
     private readonly cloudAlphaScaleSlider = $(`<input type="range" min="0" max="0.05" step="0.00001" value="0.04">`).on("input", () => this.preview());
 
+    private readonly waveFactorSlider = $(`<input type="range" min="0.001" max="0.1" step="0.00001" value="0.02">`).on("input", () => this.preview());
+    private readonly waveScaleSlider = $(`<input type="range" min="0.000" max="2.0" step="0.00001" value="1.0">`).on("input", () => this.preview());
+    private readonly waveTimeSlider = $(`<input type="range" min="0.000" max="100.0" step="0.00001" value="0.0">`).on("input", () => this.preview());
+
     readonly element = $(`<section>`).append(
         $(`<h2>`).text("【STEP.1】 各種設定を行ってください"),
         $(`<div class="preview-container">`).append(
@@ -47,6 +51,10 @@ export class PreviewSection {
                 $(`<div>`).text("雲の細部強調："), this.fbmDepthSlider,
                 $(`<div>`).text("雲の量："), this.fbmThresholdSlider,
                 $(`<div>`).text("雲の時間："), this.cloudTimeSlider,
+
+                $(`<div>`).text("湖面ゆらぎ強さ："), this.waveFactorSlider,
+                $(`<div>`).text("湖面ゆらぎサイズ："), this.waveScaleSlider,
+                $(`<div>`).text("湖面の時間："), this.waveTimeSlider,
             ),
         ),
     );
@@ -100,6 +108,10 @@ export class PreviewSection {
             cloudMinY: parseFloat(this.cloudMinYSlider.val() + ""),
             cloudThickness: parseFloat(this.cloudThicknessSlider.val() + ""),
             cloudAlphaScale: parseFloat(this.cloudAlphaScaleSlider.val() + ""),
+
+            waveFactor: parseFloat(this.waveFactorSlider.val() + ""),
+            waveScale: parseFloat(this.waveScaleSlider.val() + ""),
+            waveTime: parseFloat(this.waveTimeSlider.val() + ""),
 
             cloudMaxSteps,
             fbmMaxSteps,
