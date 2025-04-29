@@ -1,0 +1,191 @@
+$breakpoint-mobile: 800px;
+
+@mixin mobile {
+    @media screen and (max-width: $breakpoint-mobile) {
+        @content;
+    }
+}
+
+body,
+html {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+    height: 100%;
+}
+
+body {
+    font-family: "Noto Sans JP", serif;
+    font-size: 16px;
+    font-weight: 400;
+    background: black;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    position: relative;
+    padding: 48px 0;
+    color: white;
+    text-shadow: 0 1px 2px black;
+    text-align: center;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("./header.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: -1;
+        filter: brightness(0.8);
+    }
+
+    a {
+        color: inherit;
+    }
+
+    .title {
+        font-family: "Kaisei HarunoUmi";
+        font-size: 28px;
+        margin: 16px 0;
+    }
+}
+
+main {
+    padding: 24px 12px;
+
+    @include mobile {
+        padding: 24px 4px;
+    }
+}
+
+section {
+    border-radius: 8px;
+    overflow: hidden;
+    
+    max-width: 1024px;
+    margin: 0 auto;
+
+    > h2 {
+        font-weight: 500;
+        margin: 0;
+        padding: 4px 8px;
+        color: white;
+        background: #424242;
+        font-size: 18px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    > div {
+        background: linear-gradient(220.55deg, #EAEAEA 0%, #8B8B8B 100%);
+        padding: 12px;
+
+        @include mobile {
+            padding: 4px;
+        }
+    }
+}
+
+section + section {
+    margin-top: 24px;
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+ul {
+    margin: 0;
+    padding-left: 30px;
+}
+
+.preview-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+
+    > canvas {
+        //border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
+}
+
+.params {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px;
+    align-items: center;
+
+    > :nth-child(odd) {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    > :nth-child(even) {
+        //max-width: 400px;   
+    }
+
+    input[type="range"] {
+        touch-action: pan-y;
+        cursor: pointer;
+    }
+
+    input[type="number"] {
+        width: 80px;
+        display: inline-block;
+        font-family: inherit;
+        font-size: inherit;
+    }
+
+    select {
+        font-family: inherit;
+        font-size: inherit;
+        width: fit-content;
+    }
+}
+
+.render-contents {
+    .resolution {
+        display: flex;
+        align-items: center;
+
+        > * + * {
+            margin-left: 4px;
+        }
+    }
+
+    .render-result {
+        overflow: auto;
+
+        > * {
+            border: 1px solid #bbb;
+        }
+    }
+
+    button {
+        margin: 16px 0;
+    }
+}
+
+footer {
+    color: white;
+    background: #424242;
+    font-size: 14px;
+    text-align: center;
+    padding: 4px;
+
+    a {
+        color: inherit;
+    }
+}
