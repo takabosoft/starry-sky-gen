@@ -10,7 +10,7 @@ float sampleCloudDensity(vec3 p) {
     float dist = distance(cameraOrigin, p);
     int steps = int(mix(float(u_fbmMaxSteps), float(u_fbmMinSteps), clamp(dist / 3000.0, 0.0, 1.0)));
 
-    p += vec3(8.0, 1.0, 4.0) * 0.4 * u_cloudTime;
+    p += vec3(8.0, 1.0, 4.0) * u_cloudTime;
 
     for (int i = 0; i < 100; i++) {
         if (i >= steps) {

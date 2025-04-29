@@ -10,6 +10,14 @@ export interface RendererParams {
     readonly milkyScale: number;
     readonly milkyBlend: number;
 
+    readonly fbmScale: number;
+    readonly fbmDepth: number;
+    readonly fbmThreshold: number;
+    readonly cloudTime: number;
+    readonly cloudMinY: number;
+    readonly cloudThickness: number;
+    readonly cloudAlphaScale: number;
+
     readonly cloudMaxSteps: number;
     readonly fbmMaxSteps: number;
     readonly fbmMinSteps: number;
@@ -37,6 +45,14 @@ export class Renderer {
         { name: "u_starXRot", getValue: p => p.starXRot },
         { name: "u_milkyScale", getValue: p => p.milkyScale },
         { name: "u_milkyBlend", getValue: p => p.milkyBlend },
+
+        { name: "u_fbmScale", getValue: p => p.fbmScale },
+        { name: "u_fbmDepth", getValue: p => p.fbmDepth },
+        { name: "u_fbmThreshold", getValue: p => p.fbmThreshold },
+        { name: "u_cloudTime", getValue: p => p.cloudTime },
+        { name: "u_cloudMinY", getValue: p => p.cloudMinY },
+        { name: "u_cloudThickness", getValue: p => p.cloudThickness },
+        { name: "u_cloudAlphaScale", getValue: p => p.cloudAlphaScale },
     ];
     private readonly uniform1iInfos: readonly Uniform1iInfo[] = [
         { name: "u_cloudMaxSteps", getValue: p => p.cloudMaxSteps },
