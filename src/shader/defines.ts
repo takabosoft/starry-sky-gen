@@ -6,6 +6,7 @@ uniform vec2 u_resolution;
 
 uniform float u_cameraY;
 uniform float u_cameraXRot;
+uniform float u_mountainTime;
 
 const int u_fbmMaxSteps = 10;
 const int u_fbmMinSteps = 5;

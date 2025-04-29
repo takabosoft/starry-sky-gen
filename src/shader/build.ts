@@ -19,7 +19,7 @@ ${cloud}
 
 float getMountainShadow(Ray ray) {
     vec3 mountainUnit = normalize(vec3(ray.direction.x, 0, ray.direction.z));
-    float noise = fbm(5, mountainUnit * 1.4, 0.8, 2.0, 1.0, 0.51);
+    float noise = fbm(8, vec3(mountainUnit.x, u_mountainTime, mountainUnit.z) * 1.4, 0.8, 2.0, 1.0, 0.51);
     float mountainHeight = pow(noise, 2.0) * 10.0 + 4.5;
     float dis = 100.0;
 

@@ -4,6 +4,7 @@ import { buildFragmentShader } from "./shader/build";
 export interface RendererParams {
     readonly cameraY: number;
     readonly cameraXRot: number;
+    readonly mountainTime: number;
 }
 
 interface Uniform1fInfo {
@@ -18,6 +19,7 @@ export class Renderer {
     private readonly uniform1fInfos: readonly Uniform1fInfo[] = [
         { name: "u_cameraY", getValue: p => p.cameraY },
         { name: "u_cameraXRot", getValue: p => p.cameraXRot },
+        { name: "u_mountainTime", getValue: p => p.mountainTime },
     ]
 
     constructor(
