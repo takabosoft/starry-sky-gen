@@ -46,9 +46,9 @@ vec3 getColor(Ray ray) {
 }
 
 void main() {
-    vec3 lookFrom = vec3(0.0, 2.0, +5.0);
+    vec3 lookFrom = vec3(0.0, u_cameraY, +5.0);
     cameraOrigin = lookFrom;
-    vec3 lookAt = vec3(0.0, 3.0, 0.0);
+    vec3 lookAt = lookFrom + rotateX(u_cameraXRot) * vec3(0.0, 0.0, -1.0);
     vec3 vUp = vec3(0.0, 1.0, 0.0);
     Ray ray = cameraGetRay(lookFrom, lookAt, vUp, 60.0);
 

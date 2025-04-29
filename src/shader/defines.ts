@@ -4,6 +4,9 @@ precision highp int;
 
 uniform vec2 u_resolution;
 
+uniform float u_cameraY;
+uniform float u_cameraXRot;
+
 const int u_fbmMaxSteps = 10;
 const int u_fbmMinSteps = 5;
 const float u_fbmScale = 0.003;

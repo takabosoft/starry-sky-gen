@@ -2,11 +2,23 @@ import { WebGLCanvas } from "./common/webGLCanvas";
 import { buildFragmentShader } from "./shader/build";
 
 export interface RendererParams {
-    
+    readonly cameraY: number;
+    readonly cameraXRot: number;
 }
+
+interface Uniform1fInfo {
+    readonly name: string;
+    readonly getValue: (params: RendererParams) => number;
+    location?: WebGLUniformLocation | null;
+}
+
 
 export class Renderer {
     readonly webGlCanvas: WebGLCanvas;
+    private readonly uniform1fInfos: readonly Uniform1fInfo[] = [
+        { name: "u_cameraY", getValue: p => p.cameraY },
+        { name: "u_cameraXRot", getValue: p => p.cameraXRot },
+    ]
 
     constructor(
         width: number, 
@@ -17,8 +29,7 @@ export class Renderer {
     }
 
     private setupUniformLocations() {
-        //this.uniform1fInfos.forEach(info => info.location = this.webGlCanvas.getUniformLocation(info.name));
-        //this.uniform1iInfos.forEach(info => info.location = this.webGlCanvas.getUniformLocation(info.name));
+        this.uniform1fInfos.forEach(info => info.location = this.webGlCanvas.getUniformLocation(info.name));
     }
 
     render(params: RendererParams): void {
@@ -27,8 +38,7 @@ export class Renderer {
             this.setupUniformLocations();
         }
 
-        //this.uniform1fInfos.forEach(info => this.webGlCanvas.uniform1f(info.location!, info.getValue(params)));
-        //this.uniform1iInfos.forEach(info => this.webGlCanvas.uniform1i(info.location!, info.getValue(params)));
+        this.uniform1fInfos.forEach(info => this.webGlCanvas.uniform1f(info.location!, info.getValue(params)));
       
         this.webGlCanvas.render();
     }
