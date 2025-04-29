@@ -30,7 +30,7 @@ float getMountainShadow(Ray ray) {
 }
 
 // レイ方向の色を取得します。
-vec3 getColor(Ray ray) {
+vec3 getWorldColor(Ray ray) {
     vec3 col = vec3(0.0);
     col += getStarsColor(ray);
     col += getSkyBackgroundColor(ray);
@@ -45,14 +45,7 @@ vec3 getColor(Ray ray) {
     return col;
 }
 
-void main() {
-    vec3 lookFrom = vec3(0.0, u_cameraY, +5.0);
-    cameraOrigin = lookFrom;
-    vec3 lookAt = lookFrom + rotateX(u_cameraXRot) * vec3(0.0, 0.0, -1.0);
-    vec3 vUp = vec3(0.0, 1.0, 0.0);
-    Ray ray = cameraGetRay(lookFrom, lookAt, vUp, 60.0);
-
-    // レイがy=0と交わる場合は反射を行う　水面のように揺らぐ
+vec3 getLakeColor(Ray ray) {
     float t = -ray.origin.y / ray.direction.y;
     if (ray.direction.y < 0.0 && t > 0.0) {
         vec3 hitPoint = ray.origin + t * ray.direction;
@@ -70,10 +63,40 @@ void main() {
         ray.origin = hitPoint + normal * 0.001; // 自己交差を避けるための微小オフセット
         ray.direction = reflectedDir;
 
-        gl_FragColor = vec4(getColor(ray) * 0.7, 1.0);
-    } else {
-        gl_FragColor = vec4(getColor(ray), 1.0);
+        return getWorldColor(ray) * 0.7;
     }
+    return vec3(0.0);
+}
+
+vec3 getColor(Camera cam) {
+    Ray ray = cameraGetRay(cam, gl_FragCoord.xy / (u_resolution - 1.0));
+
+    // レイがy=0と交わる場合は反射を行う　水面のように揺らぐ
+    float t = -ray.origin.y / ray.direction.y;
+    if (ray.direction.y < 0.0 && t > 0.0) {
+        // 湖面だけアンチエイリアシング対応（星空の方は暗くなるので掛けない）
+        
+        vec3 col = vec3(0.0);
+        for (int i = 0; i < 40; i++) {
+            if (i >= u_sampleCount) { break; }
+            float xOffset = rand(float(i));
+            float yOffset = rand(float(i) + 100.0);
+            col += getLakeColor(cameraGetRay(cam, (gl_FragCoord.xy + vec2(xOffset, yOffset)) / (u_resolution - 1.0)));
+        }
+        return col / float(u_sampleCount);
+    } else {
+        return getWorldColor(ray);
+    }
+}
+
+void main() {
+    vec3 lookFrom = vec3(0.0, u_cameraY, +5.0);
+    cameraOrigin = lookFrom;
+    vec3 lookAt = lookFrom + rotateX(u_cameraXRot) * vec3(0.0, 0.0, -1.0);
+    vec3 vUp = vec3(0.0, 1.0, 0.0);
+
+    Camera cam = cameraInit(lookFrom, lookAt, vUp, 60.0);
+    gl_FragColor = vec4(getColor(cam), 1.0);
 }
 `;
 }

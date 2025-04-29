@@ -26,8 +26,8 @@ export class PreviewSection {
     private readonly cloudAlphaScaleSlider = $(`<input type="range" min="0" max="0.05" step="0.00001" value="0.04">`).on("input", () => this.preview());
 
     private readonly waveFactorSlider = $(`<input type="range" min="0.001" max="0.1" step="0.00001" value="0.02">`).on("input", () => this.preview());
-    private readonly waveScaleSlider = $(`<input type="range" min="0.000" max="2.0" step="0.00001" value="1.0">`).on("input", () => this.preview());
-    private readonly waveTimeSlider = $(`<input type="range" min="0.000" max="100.0" step="0.00001" value="0.0">`).on("input", () => this.preview());
+    private readonly waveScaleSlider = $(`<input type="range" min="0.000" max="1.5" step="0.00001" value="1.0">`).on("input", () => this.preview());
+    private readonly waveTimeSlider = $(`<input type="range" min="0.000" max="10.0" step="0.00001" value="0.0">`).on("input", () => this.preview());
 
     readonly element = $(`<section>`).append(
         $(`<h2>`).text("【STEP.1】 各種設定を行ってください"),
@@ -67,6 +67,7 @@ export class PreviewSection {
         let cloudMaxSteps = 0;
         let fbmMaxSteps = 0;
         let fbmMinSteps = 0;
+        let sampleCount = 1;
 
         switch (quality) {
             case RenderQuality.Low:
@@ -79,16 +80,19 @@ export class PreviewSection {
                 cloudMaxSteps = 100;
                 fbmMaxSteps = 10;
                 fbmMinSteps = 2;
+                sampleCount = 4;
                 break;
             case RenderQuality.High:
                 cloudMaxSteps = 300;
                 fbmMaxSteps = 12;
                 fbmMinSteps = 6;
+                sampleCount = 4;
                 break;
             case RenderQuality.Max:
                 cloudMaxSteps = 500;
                 fbmMaxSteps = 20;
                 fbmMinSteps = 10;
+                sampleCount = 4;
                 break;
         }
 
@@ -116,6 +120,7 @@ export class PreviewSection {
             cloudMaxSteps,
             fbmMaxSteps,
             fbmMinSteps,
+            sampleCount,
         }
     }
 

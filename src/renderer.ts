@@ -25,6 +25,7 @@ export interface RendererParams {
     readonly cloudMaxSteps: number;
     readonly fbmMaxSteps: number;
     readonly fbmMinSteps: number;
+    readonly sampleCount: number;
 }
 
 interface Uniform1fInfo {
@@ -67,6 +68,7 @@ export class Renderer {
         { name: "u_cloudMaxSteps", getValue: p => p.cloudMaxSteps },
         { name: "u_fbmMaxSteps", getValue: p => p.fbmMaxSteps },
         { name: "u_fbmMinSteps", getValue: p => p.fbmMinSteps },
+        { name: "u_sampleCount", getValue: p => p.sampleCount },
     ];
 
     constructor(

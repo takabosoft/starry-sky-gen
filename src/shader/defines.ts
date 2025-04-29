@@ -27,8 +27,7 @@ uniform float u_waveTime;
 uniform int u_fbmMaxSteps;
 uniform int u_fbmMinSteps;
 uniform int u_cloudMaxSteps;
-
-
+uniform int u_sampleCount;
 
 const float PI = 3.14159265359;
 `;
