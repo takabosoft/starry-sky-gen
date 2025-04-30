@@ -47,7 +47,7 @@ vec3 getMilkyWayColor(Ray ray) {
 
 // 星たちの色
 vec3 getStarsColor(Ray ray) {
-    ray.direction *= rotateX(u_starXRot) * rotateZ(u_starZRot);
+    ray.direction = normalize(ray.direction * rotateX(u_starXRot) * rotateZ(u_starZRot));
     vec3 col = getMilkyWayColor(ray) * u_milkyBlend;
 
     // 小さな星

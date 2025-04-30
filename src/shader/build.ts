@@ -31,14 +31,18 @@ float getMountainShadow(Ray ray) {
 
 // レイ方向の色を取得します。
 vec3 getWorldColor(Ray ray) {
+    float mountainShadow = getMountainShadow(ray);
     vec3 col = vec3(0.0);
+    if (mountainShadow < 0.0001) {
+        return col;
+    }
     col += getStarsColor(ray);
     col += getSkyBackgroundColor(ray);
 
     vec4 cloud = getCloudColor(ray);
     col = mix(col, cloud.rgb, cloud.a);
 
-    col *= getMountainShadow(ray);
+    col *= mountainShadow;
 
     // ガンマ値補正
     col = pow(col, vec3(0.8));
